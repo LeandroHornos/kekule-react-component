@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Kekule React Component
+
+Based on create-reac-app, this application  is an example of how Kekule.js molecule e ditor can be called inside a React component.
+
+## React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

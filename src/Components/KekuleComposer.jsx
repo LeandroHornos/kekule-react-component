@@ -10,14 +10,21 @@ const KekuleComposer = () => {
     const showComposer = () => {
       const comp = new Kekule.Editor.Composer(composerCont.current);
       comp.setCommonToolButtons([
+        "newDoc",
         "loadData",
+        "saveData",
         "undo",
         "redo",
         "copy",
         "cut",
         "paste",
+        "zoomIn",
+        "reset",
+        "zoomOut",
+        "config",
+        "objInspector",
       ]);
-      comp.setDimension("90%", "90vh");
+      comp.setDimension("95%", "95vh");
 
       setComposer(comp);
     };
@@ -33,12 +40,13 @@ const KekuleComposer = () => {
 
 const styles = {
   composerContainer: {
+    padding: "50px 0px",
     width: "100%",
-    height: "100vh",
+    height: "200vh",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    background: "rgb(26, 45, 49)"
+    alignItems: "start",
+    background: "rgb(50, 50, 50)",
   },
 };
 
