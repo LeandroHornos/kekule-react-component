@@ -2,6 +2,10 @@
 
 Based on create-reac-app, this application is an example of how Kekule.js molecule e ditor can be called inside a React component.
 
+## Try it out!
+
+<a href="https://kekule-react-component.netlify.app/">https://kekule-react-component.netlify.app/</a>
+
 ## Fixing webpack issue when making a production build
 
 After clonning this repo you can run "npm install" to download an installl
@@ -16,20 +20,20 @@ According to PatrigceJiang, the creator of Kekule.js:
 the problem is caused by the js minification process in build. You have to manually set the some mangle configs for webpack. In the node_modules/react-scripts/config/webpack.config.js, please add a line of code in after line 234 (nowadays is actually line 270):
 
 optimization: {
-  ...
-  minimizer: [
-    ...
-    new TerserPlugin({
-      ...
-      mangle: {
-        safari10: true,   // line 234
-        reserved: ['$super', '$origin']    // add this line of code
-      }
-      ...
-    })
-    ...
-  ]
-  ...
+...
+minimizer: [
+...
+new TerserPlugin({
+...
+mangle: {
+safari10: true, // line 234
+reserved: ['$super', '$origin'] // add this line of code
+}
+...
+})
+...
+]
+...
 }
 
 <a href="https://github.com/partridgejiang/Kekule.js/issues/36">https://github.com/partridgejiang/Kekule.js/issues/36</a>
