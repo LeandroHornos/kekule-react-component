@@ -1,0 +1,34 @@
+/* 
+
+USE THIS FILE TO OVERRIDE KEKULE's CSS
+
+*/
+
+.K-Button {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.K-Button:hover {
+  background-color: rgb(217, 237, 243) !important;
+}
+
+.K-Chem-Composer-Left-Region,
+.K-Chem-Composer-Top-Region,
+.K-Chem-Composer-Bottom-Region,
+.K-Chem-Composer {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+/* .K-Chem-Composer-Left-Region {
+  padding: 10px;
+} */
+
+/*// Descomentar la linea siguiente si se quieren ocultar las scrollbars del composer */
+
+.K-Chem-Composer,
+.K-Chem-Composer-Editor-Stage,
+.K-Chem-Editor,
+.K-Chem-Editor2D,
+.K-Widget {
+  overflow: hidden !important;
+}

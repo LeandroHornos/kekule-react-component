@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
+import "./custom.css";
 import KekuleComposer from "./Components/KekuleComposer.jsx";
 
 function App() {
   return (
     <React.Fragment>
-      <div className="row">
+      <div className="row z-index-2">
         <div
-          className="col-12 d-flex flex-column align-items-center justify-content-around shadow"
+          className="col-12 pb-2 d-flex flex-column align-items-center justify-content-around shadow-sm"
           style={{ minHeight: "30vh" }}
         >
           <h1>Kekule composer</h1>
@@ -22,7 +23,7 @@ function App() {
         </div>
       </div>
       <div className="row">
-        <div className="col-12">
+        <div className="col-12 m-0 p-0">
           <KekuleComposer />
         </div>
       </div>

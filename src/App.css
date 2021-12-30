@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -8,15 +9,34 @@
   width: 100%;
   min-height: 100vh;
 }
-.composer-container {
+/* .composer-container {
   box-sizing: border-box;
   width: 100%;
   height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(26, 45, 49);
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/light-honeycomb-dark.png");
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+}
+ */
+.composer-container {
+  padding: 20px 0px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #ffffff;
+}
+
+.bg-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/first-aid-kit.png");
+  /* background-image: url("./img/texture_p4.png"); */
+/*   background-image: url("https://www.transparenttextures.com/patterns/p4.png");
+ */  /* background-image: url("https://www.transparenttextures.com/patterns/white-carbon.png"); */
+
 }
 
 .row {
@@ -24,4 +44,24 @@
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+.bgred {
+  background-color: red;
+}
+
+.editor-side-btn {
+  background-color: white;
+}
+
+.editor-side-btn:hover {
+  background-color: rgb(198, 250, 252);
+}
+
+.editor-side-btn:active {
+  background-color: rgb(41, 255, 255);
+}
+
+.editor-side-btn {
+  background-color: white;
 }

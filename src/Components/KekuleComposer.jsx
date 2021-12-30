@@ -54,8 +54,6 @@ const KekuleComposer = () => {
         "zoomIn",
         "reset",
         "zoomOut",
-        "config",
-        "objInspector",
       ]);
       comp.setDimension("95%", "95vh");
 
@@ -65,22 +63,26 @@ const KekuleComposer = () => {
     showComposer();
   }, []);
   return (
-    <div style={styles.composerContainer}>
-      <div ref={composerCont} />
+    <div className="row m-0">
+      <div className="col-md-10 p-0">
+        <div className="composer-container bg-texture">
+          <div ref={composerCont} className="shadow" />
+        </div>
+      </div>
+      <div className="col-md-2 d-flex flex-column align-items justify-content-start pb-3">
+        <div class="d-grid gap-2" style={{ paddingTop: "20px" }}>
+          <button class="btn editor-side-btn shadow mt-2" type="button">
+            Button
+          </button>
+          <button class="btn editor-side-btn shadow mt-2" type="button">
+            Button
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-const styles = {
-  composerContainer: {
-    padding: "50px 0px",
-    width: "100%",
-    height: "200vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "start",
-    background: "rgb(50, 50, 50)",
-  },
-};
+
 
 export default KekuleComposer;
