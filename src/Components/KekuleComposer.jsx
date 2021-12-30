@@ -33,11 +33,13 @@ optimization: {
 
 import React, { useEffect, useState } from "react";
 import Kekule from "kekule";
+import Modal from "./Modal";
 
 const KekuleComposer = () => {
   const composerCont = React.createRef();
 
   const [composer, setComposer] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const showComposer = () => {
@@ -62,27 +64,47 @@ const KekuleComposer = () => {
 
     showComposer();
   }, []);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="row m-0">
       <div className="col-md-10 p-0">
+        <Modal show={showModal} handleClose={handleCloseModal}>
+          <p>Hola! soy el modal</p>
+        </Modal>
         <div className="composer-container bg-texture">
-          <div ref={composerCont} className="shadow" />
+          <div ref={composerCont} className="shadow shadow-intensity-lg" />
         </div>
       </div>
-      <div className="col-md-2 d-flex flex-column align-items justify-content-start pb-3">
-        <div class="d-grid gap-2" style={{ paddingTop: "20px" }}>
-          <button class="btn editor-side-btn shadow mt-2" type="button">
+      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-between pb-2">
+        <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+          <button
+            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+          >
             Button
           </button>
-          <button class="btn editor-side-btn shadow mt-2" type="button">
+          <button
+            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+          >
             Button
+          </button>
+        </div>
+        <div class="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
+          <button
+            class="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+          >
+            Ver moléculas
           </button>
         </div>
       </div>
     </div>
   );
 };
-
-
 
 export default KekuleComposer;

@@ -37,10 +37,7 @@ body {
 }
 
 .bg-texture {
-  background-image: url("https://www.transparenttextures.com/patterns/first-aid-kit.png");
-  /* background-image: url("./img/texture_p4.png"); */
-  /*   background-image: url("https://www.transparenttextures.com/patterns/p4.png");
- */ /* background-image: url("https://www.transparenttextures.com/patterns/white-carbon.png"); */
+  background-image: url("./img/first-aid-kit.png");
 }
 
 .row {
@@ -68,4 +65,12 @@ body {
 
 .editor-side-btn {
   background-color: white;
+}
+
+.header {
+  background-color: #fefefe;
+  color: #494848;
+}
+.editor-side-bar {
+  background-color: #fefefe;
 }
