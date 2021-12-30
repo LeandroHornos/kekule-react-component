@@ -1,8 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
 }
 
 .app {
@@ -34,9 +39,8 @@
 .bg-texture {
   background-image: url("https://www.transparenttextures.com/patterns/first-aid-kit.png");
   /* background-image: url("./img/texture_p4.png"); */
-/*   background-image: url("https://www.transparenttextures.com/patterns/p4.png");
- */  /* background-image: url("https://www.transparenttextures.com/patterns/white-carbon.png"); */
-
+  /*   background-image: url("https://www.transparenttextures.com/patterns/p4.png");
+ */ /* background-image: url("https://www.transparenttextures.com/patterns/white-carbon.png"); */
 }
 
 .row {
