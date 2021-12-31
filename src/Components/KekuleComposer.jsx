@@ -31,15 +31,19 @@ optimization: {
 }
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Kekule from "kekule";
 import Modal from "./Modal";
 
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
 const KekuleComposer = () => {
+  const handle = useFullScreenHandle();
   const composerCont = React.createRef();
 
   const [composer, setComposer] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   useEffect(() => {
     const showComposer = () => {
@@ -69,41 +73,53 @@ const KekuleComposer = () => {
     setShowModal(false);
   };
 
+  const reportFullscreenChange = useCallback((state, handle) => {
+    console.log("state", state, "handle", handle);
+    setFullscreen(state);
+  });
+
   return (
-    <div className="row m-0">
-      <div className="col-md-10 p-0">
-        <Modal show={showModal} handleClose={handleCloseModal}>
-          <p>Hola! soy el modal</p>
-        </Modal>
-        <div className="composer-container bg-texture">
-          <div ref={composerCont} className="shadow shadow-intensity-lg" />
+    <FullScreen handle={handle} onChange={reportFullscreenChange}>
+      <div className="row m-0" style={{ overflowY: "auto" }}>
+        <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
+          <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+            {!fullscreen ? (
+              <button
+                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                type="button"
+                onClick={handle.enter}
+              >
+                Pantalla completa
+              </button>
+            ) : (
+              <button
+                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                type="button"
+                onClick={handle.exit}
+              >
+                Salir de pantalla completa
+              </button>
+            )}
+          </div>
+          <div class="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
+            <button
+              class="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+              type="button"
+            >
+              Ver moléculas
+            </button>
+          </div>
+        </div>
+        <div className="col-md-10 p-0">
+          <Modal show={showModal} handleClose={handleCloseModal}>
+            <p>Hola! soy el modal</p>
+          </Modal>
+          <div className="composer-container bg-texture">
+            <div ref={composerCont} className="shadow shadow-intensity-lg" />
+          </div>
         </div>
       </div>
-      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
-        <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
-          <button
-            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-          >
-            Button
-          </button>
-          <button
-            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-          >
-            Button
-          </button>
-        </div>
-        <div class="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
-          <button
-            class="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-          >
-            Ver moléculas
-          </button>
-        </div>
-      </div>
-    </div>
+    </FullScreen>
   );
 };
 

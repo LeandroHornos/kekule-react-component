@@ -6,8 +6,8 @@ USE THIS FILE TO OVERRIDE KEKULE's CSS
 
 .K-Button {
   background-color: #ffffff !important;
-  border-color: rgba(31, 31, 31, 0.2) !important;
-  box-shadow: inset 0px 0px 2px 1px rgba(128, 128, 128, 0.1) !important;
+  border-color: rgba(88, 88, 88, 0.1) !important;
+  box-shadow: inset 0px 0px 1px 1px rgba(158, 157, 157, 0.1) !important;
 }
 
 .K-Button:hover {
