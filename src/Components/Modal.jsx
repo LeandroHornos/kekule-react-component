@@ -8,9 +8,9 @@ export const Modal = ({ handleClose, show, children }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {children}
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <div className="d-grid gap-2 d-md-flex justify-content-md-center">
           <button
-            class="btn btn-sm btn-outline-danger"
+            className="btn btn-sm btn-outline-danger"
             type="button"
             onClick={handleClose}
           >

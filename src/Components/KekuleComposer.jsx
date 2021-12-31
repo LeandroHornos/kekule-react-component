@@ -35,9 +35,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import Kekule from "kekule";
 import Modal from "./Modal";
 
+import PropTypes from "prop-types";
+
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
-const KekuleComposer = () => {
+const KekuleComposer = (props) => {
+  const { getContent, getMolecules, getSelected } = props;
   const handle = useFullScreenHandle();
   const composerCont = React.createRef();
 
@@ -67,7 +70,48 @@ const KekuleComposer = () => {
     };
 
     showComposer();
+    // eslint-disable-next-line
   }, []);
+
+  const returnContent = (props) => {
+    /* This method returns the content of the
+    composer and passes it to a function recieved
+    by props that does something with de content */
+
+    const content = composer.getChemObj();
+    console.log("Contenido del composer:", content);
+
+    // getContent(content)
+  };
+
+  const returnMolecules = (props) => {
+    /* This method returns an array containing
+    the molecules drawn on the composer and passes 
+    it to a function recieved  by props that does 
+    something with de content */
+
+    let mols = composer.exportObjs(Kekule.Molecule);
+    mols = mols.map((mol) => {
+      return {
+        object: mol,
+        smiles: Kekule.IO.saveFormatData(mol, "smi"),
+        mol: Kekule.IO.saveFormatData(mol, "mol"),
+        cml: Kekule.IO.saveFormatData(mol, "cml"),
+      };
+    });
+    console.log("mols", mols);
+    // getMolecules(mols)
+  };
+
+  const returnSelected = (props) => {
+    /* This method returns an object with the
+    selected elements in the composer */
+
+    // const { getSelected } = props
+    const content = composer.getSelection();
+    console.log("Contenido seleccionado:", content);
+    // getSelected(mols)
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -76,16 +120,16 @@ const KekuleComposer = () => {
   const reportFullscreenChange = useCallback((state, handle) => {
     console.log("state", state, "handle", handle);
     setFullscreen(state);
-  });
+  }, []);
 
   return (
     <FullScreen handle={handle} onChange={reportFullscreenChange}>
       <div className="row m-0" style={{ overflowY: "auto" }}>
         <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
-          <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+          <div className="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
             {!fullscreen ? (
               <button
-                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
                 type="button"
                 onClick={handle.enter}
               >
@@ -93,7 +137,7 @@ const KekuleComposer = () => {
               </button>
             ) : (
               <button
-                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
                 type="button"
                 onClick={handle.exit}
               >
@@ -101,12 +145,30 @@ const KekuleComposer = () => {
               </button>
             )}
           </div>
-          <div class="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
+          <div
+            className="d-grid gap-2 w-100 pb-3"
+            style={{ paddingTop: "20px" }}
+          >
             <button
-              class="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
               type="button"
+              onClick={returnContent}
             >
-              Ver moléculas
+              Obtener contenido
+            </button>
+            <button
+              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+              type="button"
+              onClick={returnSelected}
+            >
+              Obtener selección
+            </button>
+            <button
+              className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+              type="button"
+              onClick={returnMolecules}
+            >
+              Obtener moléculas
             </button>
           </div>
         </div>
@@ -121,6 +183,18 @@ const KekuleComposer = () => {
       </div>
     </FullScreen>
   );
+};
+
+KekuleComposer.propTypes = {
+  getContent: PropTypes.func,
+  getMolecules: PropTypes.func,
+  getSelected: PropTypes.func,
+};
+
+KekuleComposer.defaultProps = {
+  getContent: () => {},
+  getMolecules: () => {},
+  getSelected: () => {},
 };
 
 export default KekuleComposer;
