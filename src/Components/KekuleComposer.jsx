@@ -79,7 +79,7 @@ const KekuleComposer = () => {
           <div ref={composerCont} className="shadow shadow-intensity-lg" />
         </div>
       </div>
-      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-between pb-2">
+      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
         <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
           <button
             class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
