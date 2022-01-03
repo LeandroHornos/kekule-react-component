@@ -148,6 +148,11 @@ const KekuleComposer = (props) => {
     getSelected(content);
   };
 
+  const returnComposerPngImage = () => {
+    var image_data = composer.getEditor().exportToDataUri();
+    console.log("imagen", image_data);
+  };
+
   return (
     <FullScreen handle={handle} onChange={reportFullscreenChange}>
       <div className="row m-0" style={{ overflowY: "auto" }}>
@@ -198,6 +203,13 @@ const KekuleComposer = (props) => {
               onClick={returnMolecules}
             >
               Obtener moléculas
+            </button>
+            <button
+              className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+              type="button"
+              onClick={returnComposerPngImage}
+            >
+              Obtener imagen
             </button>
           </div>
         </div>
