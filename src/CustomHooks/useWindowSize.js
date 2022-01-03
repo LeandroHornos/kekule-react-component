@@ -20,7 +20,7 @@ export default function useWindowSize() {
 }
 
 // EEjemplo de uso
-export function ShowWindowDimensions(props) {
+export function ShowWindowDimensions() {
   const [width, height] = useWindowSize();
   return (
     <span>

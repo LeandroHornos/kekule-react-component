@@ -34,15 +34,14 @@ optimization: {
 import React, { useEffect, useState, useCallback } from "react";
 import Kekule from "kekule";
 import Modal from "./Modal";
-
-import PropTypes from "prop-types";
+import useWindowSize from "../CustomHooks/useWindowSize";
 
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
-const KekuleComposer = (props) => {
-  const { getContent, getMolecules, getSelected } = props;
+const KekuleComposer = () => {
   const handle = useFullScreenHandle();
   const composerCont = React.createRef();
+  const [width, height] = useWindowSize();
 
   const [composer, setComposer] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -70,48 +69,18 @@ const KekuleComposer = (props) => {
     };
 
     showComposer();
-    // eslint-disable-next-line
   }, []);
 
-  const returnContent = (props) => {
-    /* This method returns the content of the
-    composer and passes it to a function recieved
-    by props that does something with de content */
-
-    const content = composer.getChemObj();
-    console.log("Contenido del composer:", content);
-
-    // getContent(content)
-  };
-
-  const returnMolecules = (props) => {
-    /* This method returns an array containing
-    the molecules drawn on the composer and passes 
-    it to a function recieved  by props that does 
-    something with de content */
-
-    let mols = composer.exportObjs(Kekule.Molecule);
-    mols = mols.map((mol) => {
-      return {
-        object: mol,
-        smiles: Kekule.IO.saveFormatData(mol, "smi"),
-        mol: Kekule.IO.saveFormatData(mol, "mol"),
-        cml: Kekule.IO.saveFormatData(mol, "cml"),
-      };
-    });
-    console.log("mols", mols);
-    // getMolecules(mols)
-  };
-
-  const returnSelected = (props) => {
-    /* This method returns an object with the
-    selected elements in the composer */
-
-    // const { getSelected } = props
-    const content = composer.getSelection();
-    console.log("Contenido seleccionado:", content);
-    // getSelected(mols)
-  };
+  useEffect(() => {
+    // Condicion para mostrar el Modal
+    const breakpoint = 500;
+    const mustShowModal = (width < breakpoint) & (width < height);
+    if (mustShowModal) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  }, [width, height]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -120,16 +89,16 @@ const KekuleComposer = (props) => {
   const reportFullscreenChange = useCallback((state, handle) => {
     console.log("state", state, "handle", handle);
     setFullscreen(state);
-  }, []);
+  });
 
   return (
     <FullScreen handle={handle} onChange={reportFullscreenChange}>
       <div className="row m-0" style={{ overflowY: "auto" }}>
         <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
-          <div className="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+          <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
             {!fullscreen ? (
               <button
-                className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
                 type="button"
                 onClick={handle.enter}
               >
@@ -137,44 +106,40 @@ const KekuleComposer = (props) => {
               </button>
             ) : (
               <button
-                className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
                 type="button"
                 onClick={handle.exit}
               >
                 Salir de pantalla completa
               </button>
             )}
+            <span>
+              Window size: {width} x {height}
+            </span>
           </div>
-          <div
-            className="d-grid gap-2 w-100 pb-3"
-            style={{ paddingTop: "20px" }}
-          >
+          <div class="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
             <button
-              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+              class="btn btn-info shadow-sm shadow-intensity-lg mt-2"
               type="button"
-              onClick={returnContent}
             >
-              Obtener contenido
-            </button>
-            <button
-              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnSelected}
-            >
-              Obtener selección
-            </button>
-            <button
-              className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnMolecules}
-            >
-              Obtener moléculas
+              Ver moléculas
             </button>
           </div>
         </div>
         <div className="col-md-10 p-0">
-          <Modal show={showModal} handleClose={handleCloseModal}>
-            <p>Hola! soy el modal</p>
+          <Modal
+            show={showModal}
+            handleClose={handleCloseModal}
+            allowClosing={false}
+          >
+            <div className="row w-100 h-100">
+              <div className="col-12 w-100 h-100 bgred d-flex flex-column align-items-center justify-content-center">
+                <p className="text-center">
+                  Pon el dispositivo en posición horizontal para usar el editor
+                  de moléculas
+                </p>
+              </div>
+            </div>
           </Modal>
           <div className="composer-container bg-texture">
             <div ref={composerCont} className="shadow shadow-intensity-lg" />
@@ -183,18 +148,6 @@ const KekuleComposer = (props) => {
       </div>
     </FullScreen>
   );
-};
-
-KekuleComposer.propTypes = {
-  getContent: PropTypes.func,
-  getMolecules: PropTypes.func,
-  getSelected: PropTypes.func,
-};
-
-KekuleComposer.defaultProps = {
-  getContent: () => {},
-  getMolecules: () => {},
-  getSelected: () => {},
 };
 
 export default KekuleComposer;
