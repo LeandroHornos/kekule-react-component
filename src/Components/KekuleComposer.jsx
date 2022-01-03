@@ -219,13 +219,19 @@ const KekuleComposer = (props) => {
                 </p>
 
                 <BsFillPhoneFill size={60} color="rgba(25,150,180, 0.3)" />
-                <BsArrowRepeat size={60} color="rgb(150,150,150)"/>
-                <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)"/>
+                <BsArrowRepeat size={60} color="rgb(150,150,150)" />
+                <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)" />
               </div>
             </div>
           </Modal>
           <div className="composer-container bg-texture">
-            <div ref={composerCont} className="shadow shadow-intensity-lg" />
+            {/* zIndex: when you go fullscreen menus won't show
+            unless you raise the component's z-index */}
+            <div
+              ref={composerCont}
+              className="shadow shadow-intensity-lg"
+              style={{ zIndex: "100" }}
+            />
           </div>
         </div>
       </div>
