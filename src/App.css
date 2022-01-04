@@ -62,19 +62,19 @@ body {
   background-color: red;
 }
 
-.editor-side-btn {
+.custom-menu-btn {
   background-color: white;
 }
 
-.editor-side-btn:hover {
+.custom-menu-btn:hover {
   background-color: rgb(198, 250, 252);
 }
 
-.editor-side-btn:active {
+.custom-menu-btn:active {
   background-color: rgb(41, 255, 255);
 }
 
-.editor-side-btn {
+.custom-menu-btn {
   background-color: white;
 }
 
@@ -82,6 +82,6 @@ body {
   background-color: #fefefe;
   color: #494848;
 }
-.editor-side-bar {
+.custom-menu {
   background-color: #fefefe;
 }

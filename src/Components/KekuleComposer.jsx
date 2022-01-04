@@ -177,9 +177,9 @@ const KekuleComposer = (props) => {
     <React.Fragment>
       <div className="row m-0">
         <div className="col-12 p-0">
-          <div className="editor-side-bar bg-texture d-flex align-items-center justify-content-center p-1">
+          <div className="custom-menu bg-texture d-flex align-items-center justify-content-center p-1">
             <button
-              class="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              class="btn btn-sm custom-menu-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
               type="button"
               onClick={toggleFullScreen}
             >
@@ -187,28 +187,28 @@ const KekuleComposer = (props) => {
             </button>
 
             <button
-              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              className="btn btn-sm custom-menu-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
               type="button"
               onClick={returnContent}
             >
               Obtener contenido
             </button>
             <button
-              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              className="btn btn-sm custom-menu-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
               type="button"
               onClick={returnSelected}
             >
               Obtener selección
             </button>
             <button
-              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              className="btn btn-sm custom-menu-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
               type="button"
               onClick={returnMolecules}
             >
               Obtener moléculas
             </button>
             <button
-              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              className="btn btn-sm custom-menu-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
               type="button"
               onClick={returnComposerPngImage}
             >
