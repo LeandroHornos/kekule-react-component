@@ -1,6 +1,5 @@
 /*
-Este Hook permite conocer el estado de fullscreen siempre que se dispare
-desde react. Cuando se usa F11 falla
+Este Hook permite conocer el estado de fullscreen
 */
 
 import React, { useLayoutEffect, useState } from "react";

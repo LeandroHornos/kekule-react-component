@@ -76,7 +76,7 @@ const KekuleComposer = (props) => {
         "reset",
         "zoomOut",
       ]);
-      comp.setDimension("95%", "95vh");
+      comp.setDimension("95%", "90vh");
 
       setComposer(comp);
     };
@@ -173,88 +173,81 @@ const KekuleComposer = (props) => {
   };
 
   return (
-    <div className="row m-0" style={{ overflowY: "auto" }}>
-      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
-        <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
-          <p className="text-center p-2">
-            <small>
-              Window Size: {width} x {height}
-            </small>
-          </p>
-          <button
-            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-            onClick={toggleFullScreen}
-          >
-            {fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
-          </button>
-          <span></span>
-        </div>
-        <div className="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
-          <button
-            className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-            onClick={returnContent}
-          >
-            Obtener contenido
-          </button>
-          <button
-            className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-            onClick={returnSelected}
-          >
-            Obtener selección
-          </button>
-          <button
-            className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-            onClick={returnMolecules}
-          >
-            Obtener moléculas
-          </button>
-          <button
-            className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-            type="button"
-            onClick={returnComposerPngImage}
-          >
-            Obtener imagen
-          </button>
-        </div>
-      </div>
-      <div className="col-md-10 p-0">
-        <Modal
-          show={showModal}
-          handleClose={handleCloseModal}
-          allowClosing={false}
-        >
-          <div
-            className="row w-100 h-100"
-            style={{ backgroundColor: "rgba(255,255,255,0.9)" }}
-          >
-            <div className="col-12 w-100 h-100 d-flex flex-column align-items-center justify-content-center">
-              <img src="./android-chrome-192x192.png" alt="rocket icon" />
-              <p className="text-center" style={{ color: "rgb(25,150,180)" }}>
-                Gira el dispositivo hacia la posición{" "}
-                <strong>horizontal</strong> para usar el editor de moléculas
-              </p>
+    <React.Fragment>
+      <div className="row m-0">
+        <div className="col-12 p-0">
+          <div className="editor-side-bar bg-texture d-flex align-items-center justify-content-center p-1">
+            <button
+              class="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              type="button"
+              onClick={toggleFullScreen}
+            >
+              {fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
+            </button>
 
-              <BsFillPhoneFill size={60} color="rgba(25,150,180, 0.3)" />
-              <BsArrowRepeat size={60} color="rgb(150,150,150)" />
-              <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)" />
-            </div>
+            <button
+              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              type="button"
+              onClick={returnContent}
+            >
+              Obtener contenido
+            </button>
+            <button
+              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              type="button"
+              onClick={returnSelected}
+            >
+              Obtener selección
+            </button>
+            <button
+              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              type="button"
+              onClick={returnMolecules}
+            >
+              Obtener moléculas
+            </button>
+            <button
+              className="btn btn-sm editor-side-btn shadow-sm shadow-intensity-lg m-1 mt-2 mb-0"
+              type="button"
+              onClick={returnComposerPngImage}
+            >
+              Obtener imagen
+            </button>
           </div>
-        </Modal>
-        <div className="composer-container bg-texture">
-          {/* zIndex: when you go fullscreen menus won't show
+          <Modal
+            show={showModal}
+            handleClose={handleCloseModal}
+            allowClosing={false}
+          >
+            <div
+              className="row w-100 h-100"
+              style={{ backgroundColor: "rgba(255,255,255,0.9)" }}
+            >
+              <div className="col-12 w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                <img src="./android-chrome-192x192.png" alt="rocket icon" />
+                <p className="text-center" style={{ color: "rgb(25,150,180)" }}>
+                  Gira el dispositivo hacia la posición{" "}
+                  <strong>horizontal</strong> para usar el editor de moléculas
+                </p>
+
+                <BsFillPhoneFill size={60} color="rgba(25,150,180, 0.3)" />
+                <BsArrowRepeat size={60} color="rgb(150,150,150)" />
+                <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)" />
+              </div>
+            </div>
+          </Modal>
+          <div className="composer-container bg-texture">
+            {/* zIndex: when you go fullscreen menus won't show
             unless you raise the component's z-index */}
-          <div
-            ref={composerCont}
-            className="shadow shadow-intensity-lg"
-            style={{ zIndex: "100" }}
-          />
+            <div
+              ref={composerCont}
+              className="shadow shadow-intensity-lg"
+              style={{ zIndex: "100" }}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
