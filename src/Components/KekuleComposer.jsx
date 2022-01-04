@@ -31,7 +31,7 @@ optimization: {
 }
  */
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Kekule from "kekule";
 import Modal from "./Modal";
 import useWindowSize from "../CustomHooks/useWindowSize";
@@ -98,11 +98,6 @@ const KekuleComposer = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-  const reportFullscreenChange = useCallback((state, handle) => {
-    console.log("state", state, "handle", handle);
-    setFullscreen(state);
-  });
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
