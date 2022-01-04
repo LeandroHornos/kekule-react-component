@@ -82,6 +82,7 @@ const KekuleComposer = (props) => {
     };
 
     showComposer();
+    // eslint-disable-next-line
   }, []);
 
   // SCREEN MANAGEMENT

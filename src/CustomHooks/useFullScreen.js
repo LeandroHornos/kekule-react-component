@@ -2,7 +2,7 @@
 Este Hook permite conocer el estado de fullscreen
 */
 
-import React, { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function useFullScreen() {
   const [fullScreen, setFullScreen] = useState(false);
@@ -36,6 +36,7 @@ export default function useFullScreen() {
       document.removeEventListener("MSFullscreenChange", updateFullScreen);
       document.removeEventListener("fullscreenchange", updateFullScreen);
     };
+    
   }, []);
   return fullScreen;
 }
