@@ -35,6 +35,7 @@ import React, { useEffect, useState } from "react";
 import Kekule from "kekule";
 import Modal from "./Modal";
 import useWindowSize from "../CustomHooks/useWindowSize";
+import useFullScreen from "../CustomHooks/useFullScreen";
 
 import {
   BsFillPhoneFill,
@@ -55,6 +56,7 @@ const KekuleComposer = (props) => {
 
   // Screen management Hooks & state
   const [width, height] = useWindowSize();
+  const fs = useFullScreen();
   const [showModal, setShowModal] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
 
@@ -99,15 +101,16 @@ const KekuleComposer = (props) => {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    console.log("cambiando fullscreen", fs);
+    setFullscreen(fs);
+  }, [fs]);
+
   function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      setFullscreen(true);
+    if (!fullscreen) {
       document.documentElement.requestFullscreen();
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-        setFullscreen(false);
-      }
+      document.exitFullscreen();
     }
   }
 
@@ -173,16 +176,19 @@ const KekuleComposer = (props) => {
     <div className="row m-0" style={{ overflowY: "auto" }}>
       <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
         <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+          <p className="text-center p-2">
+            <small>
+              Window Size: {width} x {height}
+            </small>
+          </p>
           <button
             class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
             type="button"
             onClick={toggleFullScreen}
           >
-            {fullscreen ? "Salir" : "Pantalla completa"}
+            {fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
           </button>
-          <span>
-            Window size: {width} x {height}
-          </span>
+          <span></span>
         </div>
         <div className="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
           <button
