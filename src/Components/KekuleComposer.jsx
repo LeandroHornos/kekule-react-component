@@ -114,9 +114,20 @@ const KekuleComposer = (props) => {
     by props that does something with de content */
 
     const content = composer.getChemObj();
-    console.log("Contenido del composer:", content);
-
+    // convert chemObject to kekule-json in order to store it somewhere
+    const molJson = Kekule.IO.saveFormatData(content, "Kekule-JSON");
+    // let's regenerate chemObject from kekule-JSON
+    const newContent = Kekule.IO.loadFormatData(molJson, "Kekule-JSON");
+    // And load the object into the editor again
+    composer.setChemObj(newContent);
+    /** */
     getContent(content);
+  };
+
+  const loadKekuleJson = (molJson) => {
+    // Use this function to load stored content into the composer 
+    const newContent = Kekule.IO.loadFormatData(molJson, "Kekule-JSON");
+    composer.setChemObj(newContent);
   };
 
   const returnMolecules = () => {
