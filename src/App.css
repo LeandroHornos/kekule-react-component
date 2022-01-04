@@ -10,6 +10,13 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+*:fullscreen,
+*:-ms-fullscreen,
+*:-webkit-full-screen,
+*:-moz-full-screen {
+  overflow: auto !important;
+}
+
 .app {
   width: 100%;
   min-height: 100vh;

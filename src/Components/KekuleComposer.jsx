@@ -42,7 +42,6 @@ import {
   BsArrowRepeat,
 } from "react-icons/bs";
 
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import PropTypes from "prop-types";
 
 const KekuleComposer = (props) => {
@@ -56,7 +55,6 @@ const KekuleComposer = (props) => {
 
   // Screen management Hooks & state
   const [width, height] = useWindowSize();
-  const handle = useFullScreenHandle();
   const [showModal, setShowModal] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
 
@@ -106,6 +104,18 @@ const KekuleComposer = (props) => {
     setFullscreen(state);
   });
 
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      setFullscreen(true);
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setFullscreen(false);
+      }
+    }
+  }
+
   // COMPOSER FUNCTIONALITY
 
   const returnContent = () => {
@@ -125,7 +135,7 @@ const KekuleComposer = (props) => {
   };
 
   const loadKekuleJson = (molJson) => {
-    // Use this function to load stored content into the composer 
+    // Use this function to load stored content into the composer
     const newContent = Kekule.IO.loadFormatData(molJson, "Kekule-JSON");
     composer.setChemObj(newContent);
   };
@@ -165,100 +175,85 @@ const KekuleComposer = (props) => {
   };
 
   return (
-    <FullScreen handle={handle} onChange={reportFullscreenChange}>
-      <div className="row m-0" style={{ overflowY: "auto" }}>
-        <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
-          <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
-            {!fullscreen ? (
-              <button
-                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-                type="button"
-                onClick={handle.enter}
-              >
-                Pantalla completa
-              </button>
-            ) : (
-              <button
-                class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-                type="button"
-                onClick={handle.exit}
-              >
-                Salir de pantalla completa
-              </button>
-            )}
-            <span>
-              Window size: {width} x {height}
-            </span>
-          </div>
-          <div
-            className="d-grid gap-2 w-100 pb-3"
-            style={{ paddingTop: "20px" }}
+    <div className="row m-0" style={{ overflowY: "auto" }}>
+      <div className="editor-side-bar col-md-2 d-flex flex-column align-items-center justify-content-start pb-2">
+        <div class="d-grid gap-2 w-100" style={{ paddingTop: "20px" }}>
+          <button
+            class="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+            onClick={toggleFullScreen}
           >
-            <button
-              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnContent}
-            >
-              Obtener contenido
-            </button>
-            <button
-              className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnSelected}
-            >
-              Obtener selección
-            </button>
-            <button
-              className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnMolecules}
-            >
-              Obtener moléculas
-            </button>
-            <button
-              className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
-              type="button"
-              onClick={returnComposerPngImage}
-            >
-              Obtener imagen
-            </button>
-          </div>
+            {fullscreen ? "Salir" : "Pantalla completa"}
+          </button>
+          <span>
+            Window size: {width} x {height}
+          </span>
         </div>
-        <div className="col-md-10 p-0">
-          <Modal
-            show={showModal}
-            handleClose={handleCloseModal}
-            allowClosing={false}
+        <div className="d-grid gap-2 w-100 pb-3" style={{ paddingTop: "20px" }}>
+          <button
+            className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+            onClick={returnContent}
           >
-            <div
-              className="row w-100 h-100"
-              style={{ backgroundColor: "rgba(255,255,255,0.9)" }}
-            >
-              <div className="col-12 w-100 h-100 d-flex flex-column align-items-center justify-content-center">
-                <img src="./android-chrome-192x192.png" alt="rocket icon" />
-                <p className="text-center" style={{ color: "rgb(25,150,180)" }}>
-                  Gira el dispositivo hacia la posición{" "}
-                  <strong>horizontal</strong> para usar el editor de moléculas
-                </p>
-
-                <BsFillPhoneFill size={60} color="rgba(25,150,180, 0.3)" />
-                <BsArrowRepeat size={60} color="rgb(150,150,150)" />
-                <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)" />
-              </div>
-            </div>
-          </Modal>
-          <div className="composer-container bg-texture">
-            {/* zIndex: when you go fullscreen menus won't show
-            unless you raise the component's z-index */}
-            <div
-              ref={composerCont}
-              className="shadow shadow-intensity-lg"
-              style={{ zIndex: "100" }}
-            />
-          </div>
+            Obtener contenido
+          </button>
+          <button
+            className="btn editor-side-btn shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+            onClick={returnSelected}
+          >
+            Obtener selección
+          </button>
+          <button
+            className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+            onClick={returnMolecules}
+          >
+            Obtener moléculas
+          </button>
+          <button
+            className="btn btn-info shadow-sm shadow-intensity-lg mt-2"
+            type="button"
+            onClick={returnComposerPngImage}
+          >
+            Obtener imagen
+          </button>
         </div>
       </div>
-    </FullScreen>
+      <div className="col-md-10 p-0">
+        <Modal
+          show={showModal}
+          handleClose={handleCloseModal}
+          allowClosing={false}
+        >
+          <div
+            className="row w-100 h-100"
+            style={{ backgroundColor: "rgba(255,255,255,0.9)" }}
+          >
+            <div className="col-12 w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+              <img src="./android-chrome-192x192.png" alt="rocket icon" />
+              <p className="text-center" style={{ color: "rgb(25,150,180)" }}>
+                Gira el dispositivo hacia la posición{" "}
+                <strong>horizontal</strong> para usar el editor de moléculas
+              </p>
+
+              <BsFillPhoneFill size={60} color="rgba(25,150,180, 0.3)" />
+              <BsArrowRepeat size={60} color="rgb(150,150,150)" />
+              <BsFillPhoneLandscapeFill size={60} color="rgb(25,200,180)" />
+            </div>
+          </div>
+        </Modal>
+        <div className="composer-container bg-texture">
+          {/* zIndex: when you go fullscreen menus won't show
+            unless you raise the component's z-index */}
+          <div
+            ref={composerCont}
+            className="shadow shadow-intensity-lg"
+            style={{ zIndex: "100" }}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
