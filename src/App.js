@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import "./custom.css";
 import KekuleComposer from "./Components/KekuleComposer.jsx";
 
 function App() {

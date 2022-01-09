@@ -33,6 +33,7 @@ optimization: {
 
 import React, { useEffect, useState } from "react";
 import Kekule from "kekule";
+import "./kekule-custom.css";
 import Modal from "./Modal";
 import useWindowSize from "../CustomHooks/useWindowSize";
 import useFullScreen from "../CustomHooks/useFullScreen";
